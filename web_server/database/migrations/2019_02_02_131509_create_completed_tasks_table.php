@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateCompletedTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,16 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->increments('user_id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+        Schema::create('completed_tasks', function (Blueprint $table) {
+            $table->increments('completed_task_id');
+            $table->unsignedInteger('task_id');
             $table->unsignedInteger('house_id');
-            $table->string('hex_colour', 6);
-            $table->rememberToken();
+            $table->unsignedInteger('user_id');
             $table->timestamps();
 
+            // $table->foreign('task_id')->references('task_id')->on('tasks');
             // $table->foreign('house_id')->references('house_id')->on('houses');
+            // $table->foreign('user_id')->references('user_id')->on('users');
         });
     }
 
@@ -35,6 +33,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('completed_tasks');
     }
 }
