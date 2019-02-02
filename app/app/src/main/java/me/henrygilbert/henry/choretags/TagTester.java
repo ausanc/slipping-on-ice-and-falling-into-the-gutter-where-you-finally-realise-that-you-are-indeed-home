@@ -1,10 +1,12 @@
-package com.example.android.nfc;
+package me.henrygilbert.henry.choretags;
 
+import android.nfc.NdefRecord;
 import android.nfc.Tag;
 import android.nfc.tech.MifareUltralight;
 import android.util.Log;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 public class TagTester {
 
@@ -13,11 +15,18 @@ public class TagTester {
     public void writeTag(Tag tag, String tagText) {
         MifareUltralight ultralight = MifareUltralight.get(tag);
         try {
+            NdefRecord record = NdefRecord.createTextRecord("en", tagText);
+            byte[] recordString = record.getPayload();
             ultralight.connect();
-            ultralight.writePage(4, "abcd".getBytes(Charset.forName("US-ASCII")));
-            ultralight.writePage(5, "efgh".getBytes(Charset.forName("US-ASCII")));
-            ultralight.writePage(6, "ijkl".getBytes(Charset.forName("US-ASCII")));
-            ultralight.writePage(7, "mnop".getBytes(Charset.forName("US-ASCII")));
+
+            for (int i = 0; i < (recordString.length / 4); i++){
+                byte[] slice = Arrays.copyOfRange(recordString, i*4, i*4+3);
+                ultralight.writePage(i+4, slice);
+            }
+//            ultralight.writePage(4, "abcd".getBytes(Charset.forName("US-ASCII")));
+//            ultralight.writePage(5, "efgh".getBytes(Charset.forName("US-ASCII")));
+//            ultralight.writePage(6, "ijkl".getBytes(Charset.forName("US-ASCII")));
+//            ultralight.writePage(7, "mnop".getBytes(Charset.forName("US-ASCII")));
         } catch (IOException e) {
             Log.e(TAG, "IOException while writing MifareUltralight...", e);
         } finally {
