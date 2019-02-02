@@ -31,7 +31,6 @@
             <!-- android:pathPrefix="/example" /> -->
             <!-- </intent-filter> -->
 
-
         </activity>
         <activity android:name=".ScannedTagActivity">
             <intent-filter>
@@ -42,6 +41,7 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity android:name=".WriteTagActivity"></activity>
     </application>
 
 </manifest>
