@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.henrygilbert.henry.choretags">
 
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +21,25 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.nfc.action.NDEF_DISCOVERED"/> -->
+            <!-- <category android:name="android.intent.category.DEFAULT"/> -->
+            <!-- <data android:scheme="http" -->
+            <!-- android:host="example.com" -->
+            <!-- android:pathPrefix="/example" /> -->
+            <!-- </intent-filter> -->
+
+
+        </activity>
+        <activity android:name=".ScannedTagActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
     </application>
