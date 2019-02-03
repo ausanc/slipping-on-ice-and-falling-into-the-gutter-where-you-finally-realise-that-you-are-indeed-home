@@ -40,8 +40,8 @@
                         </div>
 
 
-                        <div class="form-group{{ $errors->has('house_id') ? ' has-error' : '' }}">
-                            <label for="house_id" class="col-md-4 control-label">house_id</label>
+                        <div class="form-group row">
+                            <label for="house_id" class="col-md-4 col-form-label text-md-right">House</label>
 
                             <div class="col-md-6">
                                 <input id="house_id" type="text" class="form-control" name="house_id" value="{{ old('house_id') }}" required autofocus>
