@@ -28,7 +28,7 @@ class TaskController extends Controller
         $task_house_id = Task::where('task_id', $task_id)->firstorfail()->house_id;
 
         if($house_id != $task_house_id) {
-            return "The user is not in this task's house.";
+            return view('alerts.user_not_in_house');
         }
 
         CompletedTask::create([
@@ -37,6 +37,6 @@ class TaskController extends Controller
             'user_id' => $user_id
         ]);
     
-        return "Task complete.";
+        return view('alerts.completion_success');
     }
 }
