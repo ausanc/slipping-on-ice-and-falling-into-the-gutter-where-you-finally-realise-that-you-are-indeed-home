@@ -25,6 +25,6 @@ class Task extends Model
 
     public function completedTasks()
     {
-        return $this->hasMany('App\CompletedTask');
+        return $this->hasMany('App\CompletedTask')->orderBy('created_at', 'DESC');
     }
 }

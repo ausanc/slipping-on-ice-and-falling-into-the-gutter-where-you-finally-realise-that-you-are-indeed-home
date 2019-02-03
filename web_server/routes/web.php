@@ -19,8 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/house/{user_id}', 'HouseController@getHouseTasks');
+// Route::get('/house', 'HouseController@getHouseTasks')->name('my_house')->middleware('auth');
 
-Route::get('/tasks', 'HouseController@displayTaskList')->middleware('auth');
+Route::get('/tasks', 'HouseController@displayTaskList')->name('my_house')->middleware('auth');
 
 Route::get('/complete/{task_id}', 'TaskController@completeTask');

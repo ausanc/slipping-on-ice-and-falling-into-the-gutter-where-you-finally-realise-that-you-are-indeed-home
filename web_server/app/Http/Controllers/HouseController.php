@@ -13,29 +13,15 @@ use App\CompletedTask;
 
 class HouseController extends Controller
 {
-    public function getHouseTasks($user_id)
+    public function getHouseTasks()
     {
-        $user = User::where('id', $user_id)->first();
+        $user = Auth::user();
+
         $house_tasks = Task::where('house_id', $user->house_id)->get();
         
         return $house_tasks;
     }
 
-    // public function displayTaskList(){
-    //     $user = Auth::user();
-    //     $tasks = Task::where('house_id', $user->house_id)->get();
-    //     foreach ($tasks as $taskKey => $task) {
-    //         $task["completed"] = CompletedTask::where('task_id', $task->task_id)->orderBy('created_at', 'desc')->get();
-
-    //         foreach ($task["completed"] as $key => $completed_task) {
-    //             $task["completed"][$key]["user"] = User::findOrFail($completed_task->user_id);
-    //         }
-    //     }
-
-
-
-    //     return view('task_list', ['tasks' => $tasks]);
-    // }
     public function displayTaskList(){
         $user = Auth::user();
 
