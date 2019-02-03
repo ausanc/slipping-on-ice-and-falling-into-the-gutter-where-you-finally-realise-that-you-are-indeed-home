@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use App\House;
 
 
 class HomeController extends Controller
@@ -16,6 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', ['user' => Auth::user()]);
+        $user = Auth::user();
+        $house = House::find($user->house_id);
+
+        return view('home', ['user' => $user, 'house' => $house]);
     }
 }

@@ -16,7 +16,11 @@ class House extends Model
         'house_name',
     ];
 
-    public function user()
+    protected $with = [
+        'users', 'tasks',
+    ];
+
+    public function users()
     {
         return $this->hasMany('App\User');
     }
