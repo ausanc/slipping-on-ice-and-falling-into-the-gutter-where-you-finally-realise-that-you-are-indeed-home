@@ -39,5 +39,7 @@ class HouseController extends Controller
             'task_description' => $request['description'],
             'house_id' => 1,
         ]);
+
+        return redirect()->route('home');
     }
 }
