@@ -14,4 +14,19 @@ class CompletedTask extends Model
     protected $fillable = [
         'task_id', 'house_id', 'user_id',
     ];
+
+    protected $with = [
+        'user',
+    ];
+
+
+    public function task()
+    {
+        return $this->belongsTo('App\Task');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

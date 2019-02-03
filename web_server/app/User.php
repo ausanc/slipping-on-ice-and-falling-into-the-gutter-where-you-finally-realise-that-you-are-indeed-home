@@ -27,4 +27,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function house()
+    {
+        return $this->belongsTo('App\House');
+    }
+
+    public function completedTasks()
+    {
+        return $this->hasMany('App\CompletedTask');
+    }
 }

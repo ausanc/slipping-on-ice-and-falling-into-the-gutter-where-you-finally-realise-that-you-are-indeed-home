@@ -14,11 +14,14 @@ class CreateCompletedTasksTable extends Migration
     public function up()
     {
         Schema::create('completed_tasks', function (Blueprint $table) {
-            $table->increments('completed_task_id');
+            $table->increments('id');
             $table->unsignedInteger('task_id');
             $table->unsignedInteger('house_id');
             $table->unsignedInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('task_id')->references('id')->on('tasks');
+            $table->foreign('user_id')->reference('id')->one('users');
         });
     }
 

@@ -14,7 +14,7 @@
             <div class="card-body p-0">
                 <table class="table table-hover m-0">
                     <tbody>
-                        @foreach ($task->completed as $completed_task)
+                        @foreach ($task->completedTasks as $completed_task)
                             <tr>
                                 <th scope="row">{{ $completed_task->user->name }}</th>
                                 <td>
