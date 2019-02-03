@@ -20,21 +20,17 @@ class TaskController extends Controller
     public function completeTask($task_id)
     {   
         $user = Auth::user();
-        $user_id = $user->id;
-        $house_id = $user->house_id;
 
-        error_log("Trying to add completion of task ".$task_id." by user ".$user_id." in house ".$house_id);
+        $task = Task::findOrFail($task_id);
 
-        $task_house_id = Task::where('task_id', $task_id)->firstorfail()->house_id;
-
-        if($house_id != $task_house_id) {
+        if($user->house_id != $task->house_id) {
             return view('alerts.user_not_in_house');
         }
 
         CompletedTask::create([
-            'task_id' => $task_id,
-            'house_id' => $house_id,
-            'user_id' => $user_id
+            'task_id' => $task->id,
+            'house_id' => $task->house_id,
+            'user_id' => $user->id
         ]);
     
         return view('alerts.completion_success');

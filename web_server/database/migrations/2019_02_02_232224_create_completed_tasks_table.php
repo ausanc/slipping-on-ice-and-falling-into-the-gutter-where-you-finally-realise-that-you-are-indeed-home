@@ -15,13 +15,18 @@ class CreateCompletedTasksTable extends Migration
     {
         Schema::create('completed_tasks', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('task_id');
-            $table->unsignedInteger('house_id');
-            $table->unsignedInteger('user_id');
+            $table->integer('task_id')->unsigned();
+            $table->unsignedInteger('house_id')->unsigned();
+            $table->unsignedInteger('user_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('task_id')->references('id')->on('tasks');
-            $table->foreign('user_id')->reference('id')->one('users');
+            $table->foreign('task_id')
+                ->references('id')
+                    ->on('tasks');
+            
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
