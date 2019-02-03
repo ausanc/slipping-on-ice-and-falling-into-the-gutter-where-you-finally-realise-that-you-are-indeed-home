@@ -6,6 +6,7 @@ use App\Task;
 use App\User;
 use App\House;
 use App\CompletedTask;
+use Faker\Provider\DateTime;
 
 
 class DatabaseSeeder extends Seeder
@@ -97,20 +98,22 @@ class DatabaseSeeder extends Seeder
 
         // COMPLETED_TASK
         // house_id = 1
-        for ($i=0; $i < 5; $i++) {
+        for ($i=0; $i < 10; $i++) {
             CompletedTask::create([
                 'task_id' => rand(1, 2),
                 'house_id' => 1,
-                'user_id' => rand(1, 3)
+                'user_id' => rand(1, 3),
+                'created_at' => DateTime::dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = 'UTC')
             ]);
         }
 
         // house_id = 2
-        for ($i=0; $i < 4; $i++) {
+        for ($i=0; $i < 8; $i++) {
             CompletedTask::create([
                 'task_id' => rand(3, 4),
                 'house_id' => 2,
-                'user_id' => rand(4, 5)
+                'user_id' => rand(4, 5),
+                'created_at' => DateTime::dateTimeBetween($startDate = '-1 month', $endDate = 'now', $timezone = 'UTC')
             ]);
         }
     }

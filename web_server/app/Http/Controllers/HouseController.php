@@ -24,7 +24,7 @@ class HouseController extends Controller
         $user = Auth::user();
         $tasks = Task::where('house_id', $user->house_id)->get();
         foreach ($tasks as $taskKey => $task) {
-            $task["completed"] = CompletedTask::where('task_id', $task->task_id)->get();
+            $task["completed"] = CompletedTask::where('task_id', $task->task_id)->orderBy('created_at', 'desc')->get();
 
             foreach ($task["completed"] as $key => $completed_task) {
                 $task["completed"][$key]["user"] = User::findOrFail($completed_task->user_id);
