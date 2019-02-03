@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('house_id')->nullable();
-            $table->rememberToken();
+            $table->string('hex_colour', 6)->nullable();            $table->rememberToken();
             $table->timestamps();
         });
     }

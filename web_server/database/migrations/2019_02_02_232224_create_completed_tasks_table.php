@@ -14,7 +14,10 @@ class CreateCompletedTasksTable extends Migration
     public function up()
     {
         Schema::create('completed_tasks', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('completed_task_id');
+            $table->unsignedInteger('task_id');
+            $table->unsignedInteger('house_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

@@ -14,7 +14,8 @@ class CreateHousesTable extends Migration
     public function up()
     {
         Schema::create('houses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('house_id');
+            $table->string('house_name', 100);
             $table->timestamps();
         });
     }
