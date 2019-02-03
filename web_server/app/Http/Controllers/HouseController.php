@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\Task;
+use App\CompletedTask;
 
 
 class HouseController extends Controller
@@ -16,5 +18,21 @@ class HouseController extends Controller
         $house_tasks = Task::where('house_id', $user->house_id)->get();
         
         return $house_tasks;
+    }
+
+    public function displayTaskList(){
+        $user = Auth::user();
+        $tasks = Task::where('house_id', $user->house_id)->get();
+        foreach ($tasks as $taskKey => $task) {
+            $task["completed"] = CompletedTask::where('task_id', $task->task_id)->get();
+
+            foreach ($task["completed"] as $key => $completed_task) {
+                $task["completed"][$key]["user"] = User::findOrFail($completed_task->user_id);
+            }
+        }
+
+
+
+        return view('task_list', ['tasks' => $tasks]);
     }
 }
